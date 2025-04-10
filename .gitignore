@@ -1,0 +1,5 @@
+# folder for saving results
+/vacancies
+
+# ingnore logging file
+parser.log
