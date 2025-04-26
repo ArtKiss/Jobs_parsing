@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk, messagebox, filedialog
-from parsing_logic import parser_vacancies
+from parsing_logic import VacancyParser
 from settings import settings, regions_dict, save_settings
 from utils import save_to_excel
 from datetime import datetime
@@ -60,12 +60,16 @@ def start_gui():
     combobox_dist_name.bind('<<ComboboxSelected>>', on_district_selected)
 
     def start_parsing():
-        vacancy = entry_vacancy.get().strip() or "all"
+        vacancy = entry_vacancy.get().strip()            
         region = combobox_rg_name.get().strip()
-        district = combobox_dist_name.get().strip() or "any"
+        district = combobox_dist_name.get().strip()
+
+        vacancy_for_file_name = entry_vacancy.get().strip() or 'all'
+        region_for_file_name = combobox_rg_name.get().strip() or 'any'
+        district_for_file_name = combobox_dist_name.get().strip() or 'any'
 
         current_date = datetime.now().strftime("%d-%m-%Y")
-        default_filename = f"{vacancy}_{district}_{current_date}".replace(" ", "_")
+        default_filename = f"{vacancy_for_file_name}_{region_for_file_name}_{district_for_file_name}_{current_date}".replace(" ", "_")
         default_filename = re.sub(r"[^\w\-_\.]", "", default_filename)
 
         if not default_filename:
@@ -81,7 +85,8 @@ def start_gui():
             return
 
         def run_parsing():
-            data = parser_vacancies(vacancy, region, district, progress_bar, label_status, root)
+            parser = VacancyParser(vacancy, region, district, label_status, progress_bar, root)
+            data = parser.parse_pages()
             if data:
                 save_to_excel(data, file_path)
                 if messagebox.askyesno("Открыть файл", "Данные успешно сохранены. Хотите открыть файл?"):
@@ -95,7 +100,7 @@ def start_gui():
     btn = ttk.Button(search_tab, text="Начать поиск", command=start_parsing)
     btn.pack(pady=20)
 
-        # ========== Вкладка: Настройки ==========
+    # ========== Вкладка: Настройки ==========
     settings_tab = Frame(notebook)
     notebook.add(settings_tab, text="Настройки")
 
