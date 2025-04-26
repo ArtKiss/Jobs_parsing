@@ -9,18 +9,22 @@ A Python-based application for parsing job listings from the [gsz.gov.by](https:
 - **Customizable Settings**: Adjust browser window size, theme, and headless mode.
 - **Progress Tracking**: Real-time progress bar and status updates during parsing.
 - **Region and District Selection**: Preloaded region and district data for easy selection.
+- **Error Handling**: Robust error handling and logging to help track issues during the parsing process.
+- **Logging**: Detailed logging of each step and any issues encountered, including retries for failed pages.
 
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Jobs_Parsing.git
+   git clone https://github.com/ArtKiss/Jobs_Parsing.git
    cd Jobs_Parsing
    ```
 2. Install the required dependencies:
    pip install -r requirements.txt
 
-3. Ensure you have the latest version of Chrome installed, as the project uses Selenium with ChromeDriver.
+3. Ensure you have the latest version of Chrome installed, as the project uses Selenium with ChromeDriver. The first time you run the application, it will automatically download the necessary ChromeDriver. This may take a bit longer than subsequent runs.
+
+4. Important for the first run: After running the program for the first time, set the path for saving your files in the settings window. This is required to ensure the parsed data is saved correctly.
 
 ## Usage
 Run the application:
