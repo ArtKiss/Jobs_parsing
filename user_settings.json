@@ -1,7 +1,7 @@
 {
     "headless": true,
-    "window_width": 1024,
-    "window_height": 768,
+    "window_width": 1600,
+    "window_height": 900,
     "default_save_folder": "D:/python_projects/Jobs_Parser/Jobs_parsing/vacancies",
     "theme": "dark"
 }
